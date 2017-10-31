@@ -57,4 +57,10 @@ otorgan un incremento en su fuerza de ataque de un 40%.
 
     }
 
+    public Zerg(double cantidadesbirros, int overlords, String nombre, int numvictorias, double nivelataque, double niveldefensa) {
+        super(nombre, numvictorias, nivelataque, niveldefensa);
+        this.cantidadesbirros = cantidadesbirros;
+        this.overlords = overlords;
+    }
+
 }

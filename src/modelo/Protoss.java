@@ -41,4 +41,9 @@ la defensa en un 50%.
      return ((pilon) * 0.50) + getNiveldefensa();
     }
 
+    @Override
+    public String toString() {
+        return "Protoss{" + "pilon=" + pilon + '}';
+    }
+
 }

@@ -53,4 +53,10 @@ arma, su niv el de ataque también se incrementa en un 50%.
         return ((numedificio) * 0.25) + getNiveldefensa();
     }
 
+    public Terran(int numedificio, int tecnologia, String nombre, int numvictorias, double nivelataque, double niveldefensa) {
+        super(nombre, numvictorias, nivelataque, niveldefensa);
+        this.numedificio = numedificio;
+        this.tecnologia = tecnologia;
+    }
+
 }

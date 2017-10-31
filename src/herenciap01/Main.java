@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package herenciap01;
 
 import java.io.BufferedReader;
@@ -16,10 +11,6 @@ import modelo.Protoss;
 import modelo.Terran;
 import modelo.Zerg;
 
-/**
- *
- * @author DAM
- */
 public class Main {
 
     static List<Escuadron> misEscuadrones;
@@ -66,27 +57,25 @@ public class Main {
         } else {
             if (!parts[1].equalsIgnoreCase("zerg") && !parts[1].equalsIgnoreCase("protoss") && !parts[1].equalsIgnoreCase("terran")) {
                 System.out.println("ERROR 002: ESPÉCIE INCORRECTA");
-                
-            }else if (parts[1].equalsIgnoreCase("terran")) {
 
-                
-                    String nombre = parts[2];
-                    int ataque = Integer.parseInt(parts[3]);
-                    int defensa = Integer.parseInt(parts[4]);
-                    int edificio = Integer.parseInt(parts[5]);
-                    int tecnologia = Integer.parseInt(parts[6]);
+            } else if (parts[1].equalsIgnoreCase("terran")) {
 
-                    if (ataque < 1 || defensa < 1 || edificio < 1 || tecnologia < 1) {
-                        System.out.println(" ERROR 003: DATO INCORRECTO ");
-                    } else if (existeEscuadron(nombre)) {
-                        System.out.println(" ERROR 007: YA EXISTE UN ESCUADRON CON ESE NOMBRE");
+                String nombre = parts[2];
+                int ataque = Integer.parseInt(parts[3]);
+                int defensa = Integer.parseInt(parts[4]);
+                int edificio = Integer.parseInt(parts[5]);
+                int tecnologia = Integer.parseInt(parts[6]);
 
-                    } else {
-                        Terran t = new Terran(edificio, tecnologia, nombre, 0, ataque, defensa);
-                        misEscuadrones.add(t);
-                        System.out.println("Terran dado de alta");
-                    }
-               
+                if (ataque < 1 || defensa < 1 || edificio < 1 || tecnologia < 1) {
+                    System.out.println(" ERROR 003: DATO INCORRECTO ");
+                } else if (existeEscuadron(nombre)) {
+                    System.out.println(" ERROR 007: YA EXISTE UN ESCUADRON CON ESE NOMBRE");
+
+                } else {
+                    Terran t = new Terran(edificio, tecnologia, nombre, 0, ataque, defensa);
+                    misEscuadrones.add(t);
+                    System.out.println("Terran dado de alta");
+                }
 
             } else if (parts[1].equalsIgnoreCase("zerg")) {
 
@@ -191,7 +180,7 @@ public class Main {
 
     private static void mejorarEscuadron(String[] parts) {
 
-             String nombreEscuadron = parts[1];
+        String nombreEscuadron = parts[1];
         String PropiedadAMejorar = parts[2];
         String Nuevo = parts[3];
         int NuevoDato = 0;
@@ -217,12 +206,11 @@ public class Main {
 
                     t.setTecnologia(NuevoDato);
 
-                }else{
+                } else {
                     System.out.println("ERROR 006: Propiedad incorrecta");
                 }
             }
 
-            
             if (e instanceof Zerg) {
                 Zerg z = (Zerg) e;
 
@@ -234,20 +222,19 @@ public class Main {
 
                     z.setOverlords(NuevoDato);
 
-                }else{
+                } else {
                     System.out.println("ERROR 006: Propiedad incorrecta");
                 }
             }
-            
 
             if (e instanceof Protoss) {
                 Protoss p = (Protoss) e;
 
                 if (PropiedadAMejorar.equalsIgnoreCase("pilones")) {
-                    
+
                     p.setPilon(NuevoDato);
-                    
-                }else{
+
+                } else {
                     System.out.println("ERROR 006: Propiedad incorrecta");
                 }
 
