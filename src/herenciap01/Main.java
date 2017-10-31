@@ -41,8 +41,8 @@ public class Main {
 
                 } else if (parts[0].equalsIgnoreCase("s")) {
                     System.exit(0);
-                }else{
-                    System.out.println("ERROR 003: Letra incorrecta");
+                } else {
+                    System.out.println("< ERROR 003: Letra incorrecta > ");
                 }
             } catch (IOException ex) {
 
@@ -54,91 +54,46 @@ public class Main {
 
     public static void altaEscuadrones(String parts[]) {
         if (parts.length != 7) {
-            System.out.println("ERROR 001: Nº DE ARGUMENTOS INVÁLIDO");
+            System.out.println("< ERROR 001: Nº de argumentos inválido > ");
 
         } else {
-            if (!parts[1].equalsIgnoreCase("zerg") && !parts[1].equalsIgnoreCase("protoss") && !parts[1].equalsIgnoreCase("terran")) {
-                System.out.println("ERROR 002: ESPÉCIE INCORRECTA");
+            int nivelAtaque,nivelDefensa,habilidadUno,habilidadDos;
+            String nombre = parts[2];
+            int victoria = 0;
+            if (isNumeric(parts[3]) && isNumeric(parts[4]) && isNumeric(parts[5]) && isNumeric(parts[6])) {
+                nivelAtaque = Integer.parseInt(parts[3]);
+                nivelDefensa = Integer.parseInt(parts[4]);
+                habilidadUno = Integer.parseInt(parts[5]);
+                habilidadDos = Integer.parseInt(parts[6]);
 
-            } else if (parts[1].equalsIgnoreCase("terran")) {
-
-                String nombre = parts[2];
-                int ataque = Integer.parseInt(parts[3]);
-                int defensa = Integer.parseInt(parts[4]);
-                int edificio = Integer.parseInt(parts[5]);
-                int tecnologia = Integer.parseInt(parts[6]);
-
-                if (ataque < 1 || defensa < 1 || edificio < 1 || tecnologia < 1) {
-                    System.out.println(" ERROR 003: DATO INCORRECTO ");
-                } else if (existeEscuadron(nombre)) {
-                    System.out.println(" ERROR 007: YA EXISTE UN ESCUADRON CON ESE NOMBRE");
-
-                } else {
-                    Terran t = new Terran(edificio, tecnologia, nombre, 0, ataque, defensa);
+                if (parts[1].equalsIgnoreCase("terran")) {
+                    Terran t = new Terran(habilidadUno, habilidadDos, nombre, victoria, nivelAtaque, nivelDefensa);
                     misEscuadrones.add(t);
-                    System.out.println("Terran dado de alta");
-                }
-
-            } else if (parts[1].equalsIgnoreCase("zerg")) {
-
-                if (parts.length != 7) {
-                    System.out.println("ERROR 001: Nº DE ARGUMENTOS INVÁLIDO");
-
+                    System.out.println("< OK: Escuadrón registrado >");
+                } else if (parts[1].equalsIgnoreCase("zerg")) {
+                    Zerg z = new Zerg(habilidadUno, habilidadDos, nombre, victoria, nivelAtaque, nivelDefensa);
+                    misEscuadrones.add(z);
+                    System.out.println("< OK: Escuadrón registrado >");
+                } else if (parts[1].equalsIgnoreCase("protoss")) {
+                    Protoss p = new Protoss(habilidadUno, nombre, victoria, nivelAtaque, nivelDefensa);
+                    misEscuadrones.add(p);
+                    System.out.println("< OK: Escuadrón registrado >");
                 } else {
-                    String nombre = parts[2];
-                    int ataque = Integer.parseInt(parts[3]);
-                    int defensa = Integer.parseInt(parts[4]);
-                    int esbirros = Integer.parseInt(parts[5]);
-                    int overlords = Integer.parseInt(parts[6]);
-
-                    if (ataque < 1 || defensa < 1 || esbirros < 1 || overlords < 1) {
-                        System.out.println(" ERROR 003: DATO INCORRECTO ");
-                    }
-
-                    if (existeEscuadron(nombre)) {
-                        System.out.println(" ERROR 007: YA EXISTE UN ESCUADRÓN CON ESE NOMBRE");
-
-                    } else {
-                        Zerg z = new Zerg(esbirros, overlords, nombre, 0, ataque, defensa);
-                        misEscuadrones.add(z);
-                        System.out.println("Zerg dado de alta");
-                    }
+                    System.out.println("< ERROR 002: Especie incorrecta >");
                 }
 
-            } else if (parts[1].equalsIgnoreCase("protoss")) {
-                if (parts.length != 6) {
-                    System.out.println("ERROR 001: Nº DE ARGUMENTOS INVÁLIDO");
-
-                } else {
-
-                    String nombre = parts[2];
-                    int ataque = Integer.parseInt(parts[3]);
-                    int defensa = Integer.parseInt(parts[4]);
-                    int pilones = Integer.parseInt(parts[5]);
-
-                    if (ataque < 1 || defensa < 1 || pilones < 1) {
-                        System.out.println(" ERROR 003: DATO INCORRECTO ");
-                    }
-
-                    if (existeEscuadron(nombre)) {
-                        System.out.println(" ERROR 007: YA EXISTE UN ESCUADRÓN CON ESE NOMBRE");
-
-                    } else {
-
-                        Protoss p = new Protoss(pilones, nombre, 0, ataque, defensa);
-                        misEscuadrones.add(p);
-                        System.out.println("Protoss dado de alta");
-                    }
-
-                }
-
+            } else {
+                System.out.println("< ERROR 003: Dato incorrecto >");
             }
-
         }
 
     }
 
     private static void registrarBatalla(String[] parts) {
+        if (parts.length != 3) {
+            System.out.println("ERROR 001: Nº DE ARGUMENTOS INVÁLIDO");
+
+        }
         String nombreEscuadron1 = parts[1];
         String nombreEscuadron2 = parts[2];
         Escuadron e1 = buscarEscuadron(nombreEscuadron1);
@@ -154,48 +109,51 @@ public class Main {
                 double j2 = aleatorio2 + e2.calcularAtaque() - e1.calcularDefensa();
                 String gana = "";
                 if (j1 > j2) {
-                    System.out.println("J1 GANA UNA RONDA");
                     gana = nombreEscuadron1;
                     contadorj1++;
                 } else if (j1 == j2) {
-                    System.out.println("EMPATE");
+                    System.out.println("<OK: La batalla ha acabado en empate>");
                 } else {
                     gana = nombreEscuadron2;
                     contadorj2++;
                 }
-                System.out.println("Asalto numero: " + asaltos);
+                System.out.println("<Inicio batalla...>");
+                System.out.println("Asalto nº: " + asaltos);
                 System.out.println(" ");
-                System.out.println("Ataca: " + nombreEscuadron1 + "Nº ALEATORIO: " + aleatorio + "VALOR DE SU ATAQUE: " + j1);
-                System.out.println("Ataca: " + nombreEscuadron2 + "Nº ALEATORIO: " + aleatorio2 + "VALOR DE SU ATAQUE: " + j2);
+                System.out.println("Ataca: -" + nombreEscuadron1 + "Nº Aleatorio: -" + aleatorio + "Valor de su ataque: " + j1);
+                System.out.println("Ataca: -" + nombreEscuadron2 + "Nº Aleatorio: -" + aleatorio2 + "Valor de su ataque: " + j2);
                 System.out.println(" ");
-                System.out.println("Ganador del asalto " + gana);
+                System.out.println("Ganador del asalto: " + gana);
 
             }
+            System.out.println("<Fin batalla...>");
             if (contadorj1 > contadorj2) {
                 e2.setNumvictorias(e2.getNumvictorias() + 1);
-                System.out.println("GANADOR JUGADOR 1: " + "PUNTUACIÓN J1: " + contadorj1 + " - VS - " + " PUNTUACIÓN J2: " + contadorj2);
+                System.out.println("<OK: La batalla la ha ganado el escuadron" + nombreEscuadron1 + "con" + contadorj1 + "asaltos>: ");
             } else if (contadorj2 > contadorj1) {
                 e1.setNumvictorias(e1.getNumvictorias() + 1);
-                System.out.println("GANADOR JUGADOR 2: " + "PUNTUACIÓN: " + contadorj2 + " - VS - " + " PUNTUACIÓN J2: " + contadorj2);
+                System.out.println("<OK: La batalla la ha ganado el escuadron" + nombreEscuadron2 + "con" + contadorj2 + "asaltos>: ");
             } else {
-                System.out.println("OK. LA BATALLA HA ACABADO EN EMPATE");
+                System.out.println("<OK: La batalla ha acabado en empate>");
             }
 
+        } else {
+            System.out.println("< ERROR 005: No existe especie con ese nombre >");
         }
-    } 
+    }
 
     private static void mejorarEscuadron(String[] parts) {
+        if (parts.length != 4) {
+            System.out.println("< ERROR 001: Nº de argumentos inválido >");
+
+        }
         String nombreEscuadron = parts[1];
         String PropiedadAMejorar = parts[2];
         String Nuevo = parts[3];
         int NuevoDato = 0;
         NuevoDato = Integer.parseInt(Nuevo);
-
-        if (parts.length != 4) {
-            System.out.println("ERROR 001: Nº de argumentos inválido");
-
-        } else if (NuevoDato < 1) {
-            System.out.println(" ERROR 003: Dato incorrecto ");
+        if (NuevoDato < 1) {
+            System.out.println("< ERROR 003: Dato incorrecto >");
         } else if (existeEscuadron(nombreEscuadron)) {
 
             Escuadron e = cogerEscuadron(nombreEscuadron);
@@ -204,15 +162,14 @@ public class Main {
                 Terran t = (Terran) e;
 
                 if (PropiedadAMejorar.equalsIgnoreCase("edificio")) {
-
                     t.setNumedificio(NuevoDato);
+                    System.out.println("<OK: Propiedad mejorada>");
 
                 } else if (PropiedadAMejorar.equalsIgnoreCase("tecnologia")) {
-
                     t.setTecnologia(NuevoDato);
-
+                    System.out.println("<OK: Propiedad mejorada>");
                 } else {
-                    System.out.println("ERROR 006: Propiedad incorrecta");
+                    System.out.println("< ERROR 006: Propiedad incorrecta>");
                 }
             }
 
@@ -220,15 +177,15 @@ public class Main {
                 Zerg z = (Zerg) e;
 
                 if (PropiedadAMejorar.equalsIgnoreCase("esbirros")) {
-
                     z.setCantidadEsbirros(NuevoDato);
+                    System.out.println("<OK: Propiedad mejorada >");
 
                 } else if (PropiedadAMejorar.equalsIgnoreCase("overlords")) {
-
                     z.setOverlords(NuevoDato);
+                    System.out.println("<OK: Propiedad mejorada >");
 
                 } else {
-                    System.out.println("ERROR 006: Propiedad incorrecta");
+                    System.out.println("< ERROR 006: Propiedad incorrecta >");
                 }
             }
 
@@ -238,9 +195,10 @@ public class Main {
                 if (PropiedadAMejorar.equalsIgnoreCase("pilones")) {
 
                     p.setPilon(NuevoDato);
+                    System.out.println("<OK: Propiedad mejorada>");
 
                 } else {
-                    System.out.println("ERROR 006: Propiedad incorrecta");
+                    System.out.println("< ERROR 006: Propiedad incorrecta >");
                 }
 
             }
@@ -278,9 +236,14 @@ public class Main {
     }
 
     private static void mostrarClasificacion() {
+
         List<Integer> victorias = new ArrayList<>();
+
         for (Escuadron e : misEscuadrones) {
             victorias.add(e.getNumvictorias());
+        }
+        if (victorias.size() < 1) {
+            System.out.println("< ERROR 004: Operación incorrecta >");
         }
         Collections.sort(victorias);
 
@@ -290,6 +253,15 @@ public class Main {
                     System.out.println(misEscuadrones.get(e).getNombre() + " - " + misEscuadrones.get(e).getNumvictorias());
                 }
             }
+        }
+    }
+
+    private static boolean isNumeric(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
         }
     }
 }
