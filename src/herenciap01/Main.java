@@ -161,18 +161,22 @@ public class Main {
                     gana = nombreEscuadron2;
                     contadorj2++;
                 }
-                System.out.println("Asalto numero" + asaltos);
+                System.out.println("Asalto numero: " + asaltos);
                 System.out.println(" ");
-                System.out.println("Ataca" + nombreEscuadron1 + "Nº ALEATORIO" + aleatorio + "VALOR DE SU ATAQUE" + j1);
-                System.out.println("Ataca" + nombreEscuadron2 + "Nº ALEATORIO" + aleatorio2 + "VALOR DE SU ATAQUE" + j2);
+                System.out.println("Ataca: " + nombreEscuadron1 + "Nº ALEATORIO: " + aleatorio + "VALOR DE SU ATAQUE: " + j1);
+                System.out.println("Ataca: " + nombreEscuadron2 + "Nº ALEATORIO: " + aleatorio2 + "VALOR DE SU ATAQUE: " + j2);
                 System.out.println(" ");
                 System.out.println("Ganador del asalto " + gana);
 
             }
             if (contadorj1 > contadorj2) {
-                System.out.println("GANADOR JUGADOR 1" + "PUNTUACION J1: " + contadorj1 + "VS PUNTUACION J2" + contadorj2);
-            } else {
-                System.out.println("GANADOR JUGADOR 2" + "PUNTUACION: " + contadorj2 + "VS PUNTUACION J2" + contadorj2);
+                e2.setNumvictorias(e2.getNumvictorias()+1);
+                System.out.println("GANADOR JUGADOR 1: " + "PUNTUACIÓN J1: " + contadorj1 + " - VS - " + " PUNTUACIÓN J2: " + contadorj2);
+            } else if(contadorj2 > contadorj1) {
+                 e1.setNumvictorias(e1.getNumvictorias()+1);
+                System.out.println("GANADOR JUGADOR 2: " + "PUNTUACIÓN: " + contadorj2 + " - VS - " + " PUNTUACIÓN J2: " + contadorj2);
+            }else{
+                System.out.println("OK. LA BATALLA HA ACABADO EN EMPATE");
             }
 
         }
@@ -189,7 +193,7 @@ public class Main {
         if (parts.length != 4) {
             System.out.println("ERROR 001: Nº de argumentos inválido");
 
-        } else if (/*PropiedadAMejorar!= ||*/NuevoDato < 1) {
+        } else if (NuevoDato < 1) {
             System.out.println(" ERROR 003: Dato incorrecto ");
         } else if (existeEscuadron(nombreEscuadron)) {
 
