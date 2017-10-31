@@ -120,7 +120,7 @@ public class Main {
                 System.out.println("<Inicio batalla...>");
                 System.out.println("Asalto nº: " + asaltos);
                 System.out.println(" ");
-                System.out.println("Ataca: -" + nombreEscuadron1 + "Nº Aleatorio: -" + aleatorio + "Valor de su ataque: " + j1);
+                System.out.println("Ataca: -" + nombreEscuadron1 +""+ "Nº Aleatorio: -" + aleatorio +" "+ "Valor de su ataque: " + j1);
                 System.out.println("Ataca: -" + nombreEscuadron2 + "Nº Aleatorio: -" + aleatorio2 + "Valor de su ataque: " + j2);
                 System.out.println(" ");
                 System.out.println("Ganador del asalto: " + gana);
@@ -128,11 +128,11 @@ public class Main {
             }
             System.out.println("<Fin batalla...>");
             if (contadorj1 > contadorj2) {
-                e2.setNumvictorias(e2.getNumvictorias() + 1);
-                System.out.println("<OK: La batalla la ha ganado el escuadron" + nombreEscuadron1 + "con" + contadorj1 + "asaltos>: ");
-            } else if (contadorj2 > contadorj1) {
                 e1.setNumvictorias(e1.getNumvictorias() + 1);
-                System.out.println("<OK: La batalla la ha ganado el escuadron" + nombreEscuadron2 + "con" + contadorj2 + "asaltos>: ");
+                System.out.println("<OK: La batalla la ha ganado el escuadron" + nombreEscuadron1 + " " + "con" + " " + contadorj1 +" " + "asaltos>: ");
+            } else if (contadorj2 > contadorj1) {
+                e2.setNumvictorias(e2.getNumvictorias() + 1);
+                System.out.println("<OK: La batalla la ha ganado el escuadron:" + " " + nombreEscuadron2 + " " + "con" + " " +contadorj2 +" " + "asaltos>: ");
             } else {
                 System.out.println("<OK: La batalla ha acabado en empate>");
             }
@@ -146,7 +146,7 @@ public class Main {
         if (parts.length != 4) {
             System.out.println("< ERROR 001: Nº de argumentos inválido >");
 
-        }
+        }if (isNumeric(parts[3])) {
         String nombreEscuadron = parts[1];
         String PropiedadAMejorar = parts[2];
         String Nuevo = parts[3];
@@ -205,6 +205,9 @@ public class Main {
 
         } else {
             System.out.println("ERROR 005: No existe especie con ese nombre");
+        }
+    }else{
+           System.out.println("< ERROR 003: Dato incorrecto >"); 
         }
     }
 
