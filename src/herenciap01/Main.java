@@ -41,6 +41,8 @@ public class Main {
 
                 } else if (parts[0].equalsIgnoreCase("s")) {
                     System.exit(0);
+                }else{
+                    System.out.println("ERROR 003: Letra incorrecta");
                 }
             } catch (IOException ex) {
 
@@ -170,20 +172,19 @@ public class Main {
 
             }
             if (contadorj1 > contadorj2) {
-                e2.setNumvictorias(e2.getNumvictorias()+1);
+                e2.setNumvictorias(e2.getNumvictorias() + 1);
                 System.out.println("GANADOR JUGADOR 1: " + "PUNTUACIÓN J1: " + contadorj1 + " - VS - " + " PUNTUACIÓN J2: " + contadorj2);
-            } else if(contadorj2 > contadorj1) {
-                 e1.setNumvictorias(e1.getNumvictorias()+1);
+            } else if (contadorj2 > contadorj1) {
+                e1.setNumvictorias(e1.getNumvictorias() + 1);
                 System.out.println("GANADOR JUGADOR 2: " + "PUNTUACIÓN: " + contadorj2 + " - VS - " + " PUNTUACIÓN J2: " + contadorj2);
-            }else{
+            } else {
                 System.out.println("OK. LA BATALLA HA ACABADO EN EMPATE");
             }
 
         }
-    }
+    } 
 
     private static void mejorarEscuadron(String[] parts) {
-
         String nombreEscuadron = parts[1];
         String PropiedadAMejorar = parts[2];
         String Nuevo = parts[3];
